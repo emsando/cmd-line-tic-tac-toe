@@ -7,7 +7,7 @@ let currentPlayer = 'X'
 let boardMatrix = [
   [' ', ' ', ' '],
   [' ', ' ', ' '],
-  ['X', ' ', ' ']
+  [' ', ' ', ' ']
 ];
 
 const promptMove = (player, num) => {
@@ -15,7 +15,12 @@ const promptMove = (player, num) => {
     name: `coordinates`,
     message: `Player ${num} (${player}'s), enter coordinates as 'x y':`
   })
-  .then((res) => console.log(res.coordinates));
+  .then((res) => {
+    let nums = res.coordinates.split(' ');
+    nums = nums.map((num) => parseInt(num));
+    boardMatrix[nums[1]][nums[0]] = player;
+    console.log(board(boardMatrix));
+  });
 }
 
 console.log('=============================================');
